@@ -1,8 +1,8 @@
-package com.ghosttrio.withslack.service;
+package com.ghosttrio.withslack.service.scheduler;
 
 import com.ghosttrio.withslack.enums.SchedulerStatus;
 
-public interface SchedulerInterface {
+public interface SchedulerService {
     /**
      * 1. 스케줄러 on
      * 2. 스케줄러 off

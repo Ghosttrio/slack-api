@@ -1,7 +1,8 @@
 package com.ghosttrio.withslack.controller;
 
 import com.ghosttrio.withslack.enums.SchedulerStatus;
-import com.ghosttrio.withslack.service.impl.DynamicScheduler;
+import com.ghosttrio.withslack.service.scheduler.SchedulerService;
+import com.ghosttrio.withslack.service.scheduler.SchedulerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,20 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/scheduler")
 public class ScheduleMessageController {
 
-    private final DynamicScheduler dynamicScheduler;
+    private final SchedulerService schedulerService;
 
     @PostMapping("/start")
     public void startScheduler() {
-        dynamicScheduler.on();
+        schedulerService.on();
     }
 
     @PostMapping("/stop")
     public void stopScheduler() {
-        dynamicScheduler.off();
+        schedulerService.off();
     }
 
     @GetMapping("/status")
     public SchedulerStatus loadSchedulerStatus() {
-        return dynamicScheduler.status();
+        return schedulerService.status();
     }
 }

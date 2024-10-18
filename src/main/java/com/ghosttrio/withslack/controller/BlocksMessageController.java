@@ -4,18 +4,18 @@ import com.ghosttrio.withslack.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/blocks")
 @RequiredArgsConstructor
-@RequestMapping("/api/basics")
-public class BasicMessageController {
+public class BlocksMessageController {
 
     private final MessageService messageService;
 
-    @GetMapping("/messages")
-    public void basicMessageSend(@RequestParam String text) {
-        messageService.send(text);
+    @GetMapping
+    public String sendBlocksMessage() {
+        messageService.send();
+        return "ok";
     }
 }

@@ -1,7 +1,6 @@
-package com.ghosttrio.withslack.service.impl;
+package com.ghosttrio.withslack.service.scheduler;
 
 import com.ghosttrio.withslack.enums.SchedulerStatus;
-import com.ghosttrio.withslack.service.SchedulerInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Component;
@@ -13,10 +12,9 @@ import static com.ghosttrio.withslack.enums.SchedulerStatus.ON;
 
 @Component
 @RequiredArgsConstructor
-public class DynamicScheduler implements SchedulerInterface {
+public class SchedulerServiceImpl implements SchedulerService {
 
     private final TaskScheduler taskScheduler;
-
     private ScheduledFuture<?> scheduledFuture;
 
     @Override
