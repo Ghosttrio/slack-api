@@ -45,7 +45,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     @Override
-    public void setFixedRate() {
+    public void setFixedRate(String rate) {
 
     }
 }

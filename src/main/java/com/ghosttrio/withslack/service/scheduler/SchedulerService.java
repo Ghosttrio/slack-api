@@ -12,7 +12,7 @@ public interface SchedulerService {
      */
     void on();
     void off();
-    SchedulerStatus status();
     void send();
-    void setFixedRate();
+    void setFixedRate(String rate);
+    SchedulerStatus status();
 }

@@ -6,4 +6,4 @@ services:
       - "8080:8080"
     environment:
       SLACK_TOKEN: # Slack 토큰을 추가
-      SLACK_CHANNEL:  # 여기에 Slack 토큰을 추가합니다.
+      SLACK_CHANNEL: # 여기에 Slack 토큰을 추가합니다.
