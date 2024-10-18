@@ -1,11 +1,14 @@
 package com.ghosttrio.withslack.service.message;
 
 import com.slack.api.model.block.Blocks;
+import com.slack.api.model.block.LayoutBlock;
+
+import java.util.List;
 
 public interface MessageService {
     void send(); // 슬랙으로 기본 메시지 보내기
     void send(String text); // 슬랙으로 text 메시지 보내기
-    void send(Blocks blocks); // 슬랙으로 Blocks 메시지 보내기 
+    void send(List<LayoutBlock> blocks); // 슬랙으로 Blocks 메시지 보내기
     void send(byte[] pdf); // 슬랙으로 PDF 메시지 보내기
 
 

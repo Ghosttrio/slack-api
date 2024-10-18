@@ -25,9 +25,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void postFile() {
+    public void postFile(FilesUploadRequest request) {
         try {
-            methodsClient.filesUpload(FilesUploadRequest.builder().build());
+            methodsClient.filesUpload(request);
         } catch (IOException | SlackApiException e) {
             throw new RuntimeException(e);
         }

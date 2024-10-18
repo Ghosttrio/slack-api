@@ -4,8 +4,11 @@ import com.ghosttrio.withslack.service.builder.MessageBuilder;
 import com.ghosttrio.withslack.service.post.PostService;
 import com.slack.api.methods.request.chat.ChatPostMessageRequest;
 import com.slack.api.model.block.Blocks;
+import com.slack.api.model.block.LayoutBlock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -27,8 +30,9 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void send(Blocks blocks) {
-
+    public void send(List<LayoutBlock> blocks) {
+        ChatPostMessageRequest request = messageBuilder.createBlocks(blocks);
+        postService.postMessage(request);
     }
 
     @Override

@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  app:
+    image: ghosttrio/with-slack:latest
+    ports:
+      - "8080:8080"
+    environment:
+      SLACK_TOKEN: # Slack 토큰을 추가
+      SLACK_CHANNEL:  # 여기에 Slack 토큰을 추가합니다.
