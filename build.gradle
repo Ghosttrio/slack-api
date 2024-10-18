@@ -31,6 +31,7 @@ dependencies {
 	implementation 'com.slack.api:bolt:1.18.0'
 	implementation 'com.slack.api:bolt-servlet:1.18.0'
 	implementation 'com.slack.api:bolt-jetty:1.18.0'
+	implementation 'com.itextpdf:itext7-core:7.2.4'
 }
 
 tasks.named('test') {

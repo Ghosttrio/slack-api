@@ -37,7 +37,7 @@ public class MessageController {
 
     @PostMapping("/pdf")
     public ResponseEntity<String> sendBlocksMessage(@RequestBody MessageRequest.Pdf request) {
-        messageService.send(request.pdf());
+        messageService.send("test", null);
         return ResponseEntity.ok("PDF 메시지 전송에 성공했습니다.");
     }
 

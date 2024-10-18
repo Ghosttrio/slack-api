@@ -3,12 +3,17 @@ package com.ghosttrio.withslack.service.message;
 import com.ghosttrio.withslack.service.builder.MessageBuilder;
 import com.ghosttrio.withslack.service.post.PostService;
 import com.slack.api.methods.request.chat.ChatPostMessageRequest;
+import com.slack.api.methods.request.files.FilesUploadRequest;
 import com.slack.api.model.block.Blocks;
 import com.slack.api.model.block.LayoutBlock;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
+import static com.slack.api.model.block.Blocks.divider;
+import static com.slack.api.model.block.Blocks.section;
+import static com.slack.api.model.block.composition.BlockCompositions.markdownText;
 
 @Component
 @RequiredArgsConstructor
@@ -36,7 +41,12 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void send(byte[] pdf) {
-
+    public void send(String input, String test) {
+        byte[] pdf1 = messageBuilder.createPdf(input, test);
+        FilesUploadRequest request = FilesUploadRequest.builder()
+                .initialComment("test")
+                .fileData(pdf1)
+                .build();
+        postService.postFile(request);
     }
 }
