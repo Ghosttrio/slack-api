@@ -4,6 +4,8 @@ import com.slack.api.model.block.LayoutBlock;
 
 import java.util.List;
 
+// TODO 제네릭 적용하기
+
 public interface MessageService {
     void send(); // 슬랙으로 기본 메시지 보내기
     void send(String text); // 슬랙으로 text 메시지 보내기
