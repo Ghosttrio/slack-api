@@ -37,9 +37,6 @@ services:
 ```bash
 docker compose up
 ```
-### 관련 포스팅
-[슬랙으로 Daily Report 만들기](https://ghosttrio.github.io/posts/%EC%8A%AC%EB%9E%99%EC%A7%80%EB%9D%BC/)  
-[슬랙봇 만들기]()
 
 
 ### 기능
