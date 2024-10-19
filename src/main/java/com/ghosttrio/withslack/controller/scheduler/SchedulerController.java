@@ -12,14 +12,32 @@ import static com.ghosttrio.withslack.enums.SchedulerStatus.ON;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/schedulers")
+@RequestMapping("/api/slack/schedulers")
 public class SchedulerController {
 
     private final SchedulerService schedulerService;
 
-    @PostMapping("/on")
-    public ResponseEntity<String> startScheduler(@RequestBody SchedulerRequest.ON request) {
-        schedulerService.on(request.cron());
+    @PostMapping("/test")
+    public ResponseEntity<String> testSchedulerMessage() {
+        schedulerService.send();
+        return ResponseEntity.ok(OFF.getStatus());
+    }
+
+    @PostMapping("/text")
+    public ResponseEntity<String> startTextScheduler(@RequestBody SchedulerRequest.Text request) {
+        schedulerService.on(request.cron(), request.text());
+        return ResponseEntity.ok(ON.getStatus());
+    }
+
+    @PostMapping("/blocks")
+    public ResponseEntity<String> startBlocksScheduler(@RequestBody SchedulerRequest.Blocks request) {
+        schedulerService.on(request.cron(), request.blocks());
+        return ResponseEntity.ok(ON.getStatus());
+    }
+
+    @PostMapping("/pdf")
+    public ResponseEntity<String> startPdfScheduler(@RequestBody SchedulerRequest.Pdf request) {
+        schedulerService.on(request.cron(), request.pdf(), request.comment());
         return ResponseEntity.ok(ON.getStatus());
     }
 

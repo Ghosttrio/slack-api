@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/messages")
+@RequestMapping("/api/slack/messages")
 @RequiredArgsConstructor
 public class MessageController {
 
