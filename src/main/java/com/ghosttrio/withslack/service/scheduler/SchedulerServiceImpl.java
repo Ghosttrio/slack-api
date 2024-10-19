@@ -1,51 +1,48 @@
 package com.ghosttrio.withslack.service.scheduler;
 
 import com.ghosttrio.withslack.enums.SchedulerStatus;
-import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ScheduledFuture;
 
-import static com.ghosttrio.withslack.enums.SchedulerStatus.OFF;
-import static com.ghosttrio.withslack.enums.SchedulerStatus.ON;
 
 @Component
-@RequiredArgsConstructor
 public class SchedulerServiceImpl implements SchedulerService {
 
-    private final TaskScheduler taskScheduler;
-    private ScheduledFuture<?> scheduledFuture;
+    private final ThreadPoolTaskScheduler taskScheduler;
+    private ScheduledFuture<?> scheduledTask;
+
+    public SchedulerServiceImpl() {
+        this.taskScheduler = new ThreadPoolTaskScheduler();
+        this.taskScheduler.initialize();
+    }
 
     @Override
-    public void on() {
-        if (scheduledFuture == null || scheduledFuture.isCancelled()) {
-            scheduledFuture = taskScheduler.scheduleWithFixedDelay(() -> {
-                System.out.println("Test");
-            }, 1000);
-        }
+    public void on(String cron) {
+        off(); // 기존 스케줄러가 있다면 멈춘다
+        scheduledTask = taskScheduler.schedule(this::runScheduledTask, new CronTrigger(cron));
     }
 
     @Override
     public void off() {
-        if (scheduledFuture != null) {
-            scheduledFuture.cancel(false);
-            scheduledFuture = null;
+        if (scheduledTask != null) {
+            scheduledTask.cancel(true);
         }
     }
 
-    @Override
-    public SchedulerStatus status() {
-        return scheduledFuture == null ? ON : OFF;
+    private void runScheduledTask() {
+        System.out.println("슬랙 메시지 보내기");
     }
 
     @Override
     public void send() {
-
+        runScheduledTask();
     }
 
     @Override
-    public void setFixedRate(String rate) {
-
+    public SchedulerStatus status() {
+        return null;
     }
 }

@@ -13,15 +13,13 @@ public class MessageRequest {
     }
 
     public record Blocks(
-            /**
-             * 헤더, 바디, 푸터 받기
-             */
             List<LayoutBlock> blocks
     ) {
     }
 
     public record Pdf(
-            byte[] pdf
+            byte[] pdf,
+            String comment
     ){}
 
 }

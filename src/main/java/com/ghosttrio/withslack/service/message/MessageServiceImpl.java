@@ -36,12 +36,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void send(String input, String test) {
-        byte[] pdf1 = messageBuilder.createPdf(input, test);
-        FilesUploadRequest request = FilesUploadRequest.builder()
-                .initialComment("test")
-                .fileData(pdf1)
-                .build();
+    public void send(byte[] pdf, String comment) {
+        FilesUploadRequest request = messageBuilder.createPdf(pdf, comment);
         postService.postFile(request);
     }
 }
