@@ -1,9 +1,18 @@
-# WithSlack - 슬랙 정보 전송 프로젝트
+# WithSlack - 간단한 슬랙 정보 전송 서버
 
 ### 목적
-슬랙 봇을 이용하여 메시지를 보낼 때 구성 설정 간단하고 재사용성 있게 하기 위해 제작
+슬랙 봇을 이용하여 간단한 메시지를 보낼 때 사용
 
 ### 사용법
+
+직접 사용
+```yaml
+server:
+  port: 8080
+slack:
+  token: # Slack 토큰을 추가
+  channel: # Slack Channel ID 추가합니다.
+```
  
 Dockerfile 사용
 ```bash
@@ -22,14 +31,14 @@ services:
       - "8080:8080"
     environment:
       SLACK_TOKEN: # Slack 토큰을 추가
-      SLACK_CHANNEL: # 여기에 Slack 토큰을 추가합니다.
+      SLACK_CHANNEL: # Slack Channel ID 추가합니다.
 ```
 
 ```bash
 docker compose up
 ```
 ### 관련 포스팅
-[슬랙으로 Daily Report 만들기]()  
+[슬랙으로 Daily Report 만들기](https://ghosttrio.github.io/posts/%EC%8A%AC%EB%9E%99%EC%A7%80%EB%9D%BC/)  
 [슬랙봇 만들기]()
 
 
@@ -38,11 +47,45 @@ docker compose up
 - 슬랙으로 Blocks 메시지 보내기
 - 슬랙으로 Scheduler 메시지 보내기 
 - 슬랙으로 PDF 메시지 보내기
-- 슬랙으로 커스텀 메시지 보내기
-- 슬랙으로 메시지 스케줄링해서 보내기
-- 슬랙으로 여러 채널에 메시지 보내기
-- 기능들을 커스텀 할 수 있게 인터페이스 제공
-
-### 기능 구조도
 
 ### API
+```
+[Message API]
+
+POST /api/slack/messages/test -> 테스트 메시지 전송
+POST /api/slack/messages/text -> 문자열 메시지 전송
+{
+    "text": <텍스트 입력>
+}
+POST /api/slack/messages/blocks -> Slack Blocks 형식 메시지 전송
+{
+    "blocks" : <LayoutBlock 배열 입력>
+}
+POST /api/slack/messages/pdf -> PDF 메시지 전송 
+{
+    "pdf": <pdf 데이터 byte[] 입력>,
+    "comment": <commnet 입력>
+}
+
+[Scheduler API]
+
+POST /api/slack/schedulers/test -> 스케줄러 시작, 테스트 메시지 전송
+POST /api/slack/schedulers/text -> 스케줄러 시작, 텍스트 메시지 전송
+{
+    "cron": <Cron Job 입력 ex) * * * * * *>,
+    "text": <텍스트 입력>
+}
+POST /api/slack/schedulers/blocks -> 스케줄러 시작, Blocks 메시지 전송
+{
+    "cron": <Cron Job 입력 ex) * * * * * *>,
+    "blocks" : <LayoutBlock 배열 입력>
+}
+POST /api/slack/schedulers/pdf -> 스케줄러 시작, PDF 메시지 전송
+{
+    "cron": <Cron Job 입력 ex) * * * * * *>,
+    "pdf": <pdf 데이터 byte[] 입력>,
+    "comment": <commnet 입력>
+}
+POST /api/slack/schedulers/off -> 스케줄러 종료
+GET /api/slack/schedulers/status -> 스케줄러 상태 조회
+```

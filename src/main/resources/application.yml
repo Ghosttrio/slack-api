@@ -1,0 +1,5 @@
+server:
+  port: 8080
+slack:
+  token: ${SLACK_TOKEN}
+  channel: ${SLACK_CHANNEL}
